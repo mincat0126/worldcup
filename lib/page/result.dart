@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:worldcup/LoginController.dart';
+import 'package:worldcup/components/PikuAppbar.dart';
+import 'package:worldcup/main.dart';
+import 'package:worldcup/my_color.dart';
+
+class ResultPage extends StatefulWidget {
+  final LoginController controller;
+  final String winnerImage;
+  final String winnerName;
+
+  const ResultPage({
+    super.key,
+    required this.controller,
+    required this.winnerImage,
+    required this.winnerName,
+  });
+
+  @override
+  State<ResultPage> createState() => _ResultPageState();
+}
+
+class _ResultPageState extends State<ResultPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MyColor.backgroundColor,
+      body: Column(
+        children: [
+          PikuAppBar(controller: widget.controller),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      width: double.infinity,
+                      height: 750,
+                      decoration: const BoxDecoration(color: Color(0xFF181818)),
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              widget.winnerImage,
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentGeometry.topCenter,
+                            child: Container(
+                              width: double.infinity,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                color: Color(0x70181818),
+                              ),
+                              child: Align(
+                                alignment: AlignmentGeometry.center,
+                                child: Text(
+                                  "월드컵 우승",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: FractionalOffset(0.5, 0.9),
+                            child: Text(
+                              widget.winnerName,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 60,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 5, left: 5),
+                              child: SizedBox(
+                                width: 180,
+                                height: 50,
+                                child: TextButton.icon(
+                                  icon: const Icon(Icons.emoji_events),
+                                  onPressed: () {
+                                    widget.controller.login();
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation, _) =>
+                                            MainPage(
+                                              controller: widget.controller,
+                                            ),
+                                        transitionDuration: Duration.zero,
+                                        reverseTransitionDuration:
+                                            Duration.zero,
+                                      ),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    foregroundColor: WidgetStateProperty.all(
+                                      Colors.white,
+                                    ),
+                                    backgroundColor:
+                                        WidgetStateProperty.resolveWith<Color>((
+                                          Set<WidgetState> states,
+                                        ) {
+                                          if (states.contains(
+                                            WidgetState.hovered,
+                                          )) {
+                                            return MyColor.subColor;
+                                          }
+                                          return MyColor.mainColor;
+                                        }),
+                                    overlayColor: WidgetStateProperty.all(
+                                      Colors.transparent,
+                                    ),
+                                    shape: WidgetStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(3),
+                                      ),
+                                    ),
+                                  ),
+                                  label: const Text(
+                                    "다른 월드컵보기",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
