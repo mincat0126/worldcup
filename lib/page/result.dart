@@ -103,7 +103,6 @@ class _ResultPageState extends State<ResultPage> {
                                 child: TextButton.icon(
                                   icon: const Icon(Icons.emoji_events),
                                   onPressed: () {
-                                    widget.controller.login();
                                     Navigator.push(
                                       context,
                                       PageRouteBuilder(
