@@ -336,11 +336,6 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
                                       setState(() {
                                         worldCups.add(newWorldCup);
                                       });
-
-                                      //  확인용 출력
-                                      print(
-                                        "새 월드컵 추가됨: ${newWorldCup.title}, ${newWorldCup.description}",
-                                      );
                                     },
                                     style: ButtonStyle(
                                       foregroundColor: WidgetStateProperty.all(
