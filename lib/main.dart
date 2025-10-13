@@ -118,7 +118,7 @@ class MainPage extends StatelessWidget {
                 crossAxisCount: 6,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 8,
-                childAspectRatio: 1,
+                childAspectRatio: 0.8,
               ),
               itemCount: worldCups.length,
               itemBuilder: (context, index) {
