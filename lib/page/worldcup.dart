@@ -84,7 +84,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
       }
     }
 
-    // ✅ 이번 라운드에서 랜덤 2개 뽑기
+    // 이번 라운드에서 랜덤 2개 뽑기
     if (currentRoundIndexes.length >= 2) {
       int first = currentRoundIndexes[rand.nextInt(currentRoundIndexes.length)];
       int second;
@@ -96,7 +96,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
       currentImages = [currentRoundIndexes[0]];
     }
 
-    // ✅ 애니메이션 초기화
+    //  애니메이션 초기화
     leftAlignment = Alignment.centerLeft;
     rightAlignment = Alignment.centerRight;
     leftOpacity = 1.0;
@@ -128,7 +128,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
       }
     });
 
-    // ✅ 1초 뒤 다음 이미지 로드
+    // 1초 뒤 다음 이미지 로드
     Timer(const Duration(seconds: 1), () {
       setState(() {
         animating = false;
@@ -161,7 +161,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // ✅ 왼쪽 이미지
+                    // 왼쪽 이미지
                     Expanded(
                       flex: 1,
                       child: GestureDetector(
@@ -203,7 +203,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    // ✅ 오른쪽 이미지
+                    // 오른쪽 이미지
                     currentImages.length > 1
                         ? Expanded(
                             flex: 1,
