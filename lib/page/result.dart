@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:worldcup/LoginController.dart';
+import 'package:worldcup/components/MainIconButton.dart';
 import 'package:worldcup/components/PikuAppbar.dart';
+import 'package:worldcup/components/StrokeText.dart';
 import 'package:worldcup/main.dart';
 import 'package:worldcup/my_color.dart';
 
@@ -73,12 +75,9 @@ class _ResultPageState extends State<ResultPage> {
                           ),
                           Align(
                             alignment: FractionalOffset(0.5, 0.9),
-                            child: Text(
-                              widget.winnerName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 60,
-                              ),
+                            child: OutlineText(
+                              text: widget.winnerName,
+                              fontSize: 60,
                             ),
                           ),
                         ],
@@ -97,53 +96,20 @@ class _ResultPageState extends State<ResultPage> {
                             alignment: Alignment.topLeft,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 5, left: 5),
-                              child: SizedBox(
-                                width: 180,
-                                height: 50,
-                                child: TextButton.icon(
-                                  icon: const Icon(Icons.emoji_events),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation, _) =>
-                                            MainPage(
-                                              controller: widget.controller,
-                                            ),
-                                        transitionDuration: Duration.zero,
-                                        reverseTransitionDuration:
-                                            Duration.zero,
-                                      ),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    foregroundColor: WidgetStateProperty.all(
-                                      Colors.white,
-                                    ),
-                                    backgroundColor:
-                                        WidgetStateProperty.resolveWith<Color>((
-                                          Set<WidgetState> states,
-                                        ) {
-                                          if (states.contains(
-                                            WidgetState.hovered,
-                                          )) {
-                                            return MyColor.subColor;
-                                          }
-                                          return MyColor.mainColor;
-                                        }),
-                                    overlayColor: WidgetStateProperty.all(
-                                      Colors.transparent,
-                                    ),
-                                    shape: WidgetStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                  label: const Text(
-                                    "다른 월드컵보기",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
+                              child: MainIconButton(
+                                buttonWidth: 180,
+                                buttonHeight: 50,
+                                buttonIcon: Icon(Icons.emoji_events),
+                                text: "다른 월드컵보기",
+                                textColor: Colors.white,
+                                fontSize: 18,
+                                textHoverColor: Colors.white,
+                                buttonColor: MyColor.mainColor,
+                                buttonHoverColor: MyColor.subColor,
+                                buttonBorderRadius: 3,
+                                buttonHoverBorderRadius: 3,
+                                navigatePage: MainPage(
+                                  controller: widget.controller,
                                 ),
                               ),
                             ),
