@@ -39,11 +39,11 @@ class MainPage extends StatelessWidget {
             child: Row(
               children: [
                 MainTextField(
+                  fontSize: 15,
                   textFieldWidth: 890,
                   textFieldHeight: 35,
                   hintText: "월드컵 제목 또는 인물 이름 으로 검색하세요.",
                   hintFontSize: 13,
-                  hintColor: MyColor.hintTextColor,
                 ),
 
                 MainButton(

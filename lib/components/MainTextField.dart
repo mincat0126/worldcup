@@ -4,37 +4,51 @@ import 'package:worldcup/my_color.dart';
 class MainTextField extends StatefulWidget {
   final double? textFieldWidth;
   final double? textFieldHeight;
+  final Color? textFieldColor;
+
   final double? fontSize;
   final FontWeight? fontWeight;
-  final Color? textFieldColor;
+  final Color? textColor;
   final String? hintText;
+
   final double? hintFontSize;
   final Color? hintColor;
+
   final double? borderRadius;
   final Color? borderColor;
+  final double? borderWidth;
+
   final double? enabledBorderRadius;
   final Color? enabledBorderColor;
+  final double? enabledBorderWidth;
+
   final double? focusedBorderRadius;
-  final double? focusedBorderWidth;
   final Color? focusedBorderColor;
+  final double? focusedBorderWidth;
+
+  final bool? password;
 
   const MainTextField({
     super.key,
     this.textFieldWidth,
     this.textFieldHeight,
+    this.textFieldColor,
     this.fontSize,
     this.fontWeight,
-    this.textFieldColor,
+    this.textColor,
     this.hintText,
     this.hintFontSize,
     this.hintColor,
     this.borderRadius,
     this.borderColor,
+    this.borderWidth,
     this.enabledBorderRadius,
     this.enabledBorderColor,
-    this.focusedBorderWidth,
+    this.enabledBorderWidth,
     this.focusedBorderRadius,
     this.focusedBorderColor,
+    this.focusedBorderWidth,
+    this.password,
   });
 
   @override
@@ -51,25 +65,30 @@ class _MainTextFieldState extends State<MainTextField> {
         style: TextStyle(
           fontSize: widget.fontSize ?? 10,
           fontWeight: widget.fontWeight ?? FontWeight.normal,
+          color: widget.textColor ?? Colors.black,
         ),
         decoration: InputDecoration(
           filled: true,
           fillColor: widget.textFieldColor ?? Colors.white,
           hintText: widget.hintText ?? "",
           hintStyle: TextStyle(
-            fontSize: widget.hintFontSize,
-            color: widget.hintColor,
+            fontSize: widget.hintFontSize ?? 10,
+            color: widget.hintColor ?? MyColor.hintTextColor,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
-            borderSide: BorderSide(color: widget.borderColor ?? Colors.white),
+            borderSide: BorderSide(
+              color: widget.borderColor ?? Colors.transparent,
+              width: widget.borderWidth ?? 1,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
               widget.enabledBorderRadius ?? 0,
             ),
             borderSide: BorderSide(
-              color: widget.enabledBorderColor ?? Colors.white,
+              color: widget.enabledBorderColor ?? Colors.transparent,
+              width: widget.enabledBorderWidth ?? 0,
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -81,10 +100,10 @@ class _MainTextFieldState extends State<MainTextField> {
               width: widget.focusedBorderWidth ?? 1,
             ),
           ),
-
           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           hoverColor: Colors.transparent,
         ),
+        obscureText: widget.password ?? false,
       ),
     );
   }

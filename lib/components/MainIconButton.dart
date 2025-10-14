@@ -15,6 +15,9 @@ class MainIconButton extends StatefulWidget {
   final double? buttonBorderRadius;
   final Color? buttonBorderColor;
   final double? buttonBorderWidth;
+  final double? buttonHoverBorderRadius;
+  final Color? buttonHoverBorderColor;
+  final double? buttonHoverBorderWidth;
   final Widget? navigatePage;
   final VoidCallback? onPressed;
 
@@ -33,6 +36,9 @@ class MainIconButton extends StatefulWidget {
     this.buttonBorderRadius,
     this.buttonBorderColor,
     this.buttonBorderWidth,
+    this.buttonHoverBorderRadius,
+    this.buttonHoverBorderColor,
+    this.buttonHoverBorderWidth,
     this.navigatePage,
     this.onPressed,
   });
@@ -90,17 +96,34 @@ class _MainIconButtonState extends State<MainIconButton> {
             return widget.buttonColor ?? Colors.white;
           }),
           overlayColor: WidgetStateProperty.all(Colors.transparent),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              side: BorderSide(
-                color: widget.buttonBorderColor ?? Colors.white,
-                width: widget.buttonBorderWidth ?? 0,
-              ),
+          side: WidgetStateProperty.resolveWith<BorderSide>((states) {
+            if (states.contains(WidgetState.hovered)) {
+              return BorderSide(
+                color: widget.buttonHoverBorderColor ?? MyColor.borderColor,
+                width: widget.buttonHoverBorderWidth ?? 0,
+              );
+            }
+            return BorderSide(
+              color: widget.buttonBorderColor ?? MyColor.borderColor,
+              width: widget.buttonBorderWidth ?? 0,
+            );
+          }),
+          shape: WidgetStateProperty.resolveWith<OutlinedBorder>((
+            Set<WidgetState> states,
+          ) {
+            if (states.contains(WidgetState.hovered)) {
+              return RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  widget.buttonBorderRadius ?? 0,
+                ),
+              );
+            }
+            return RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
-                widget.buttonBorderRadius ?? 0,
+                widget.buttonHoverBorderRadius ?? 0,
               ),
-            ),
-          ),
+            );
+          }),
         ),
       ),
     );

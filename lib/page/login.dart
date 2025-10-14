@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:worldcup/LoginController.dart';
+import 'package:worldcup/components/MainButton.dart';
+import 'package:worldcup/components/MainTextField.dart';
 import 'package:worldcup/components/PikuAppBar.dart';
 import 'package:worldcup/main.dart';
 import 'package:worldcup/my_color.dart';
+import 'package:worldcup/page/policy.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginController controller;
@@ -43,185 +46,72 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(color: MyColor.mainTextColor, fontSize: 13),
             ),
             SizedBox(height: 20),
-            SizedBox(
-              width: 300,
-              height: 30,
-              child: TextField(
-                style: TextStyle(fontSize: 15, color: Colors.black),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: "이메일",
-                  hintStyle: TextStyle(
-                    color: MyColor.hintTextColor,
-                    fontSize: 15,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(color: MyColor.borderColor),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(
-                      color: MyColor.borderColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(color: MyColor.mainColor, width: 1),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                ),
+            MainTextField(
+              textFieldWidth: 300,
+              textFieldHeight: 30,
+              fontSize: 15,
+              hintText: "이메일",
+              hintFontSize: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: MainTextField(
+                password: true,
+                textFieldWidth: 300,
+                textFieldHeight: 30,
+                fontSize: 15,
+                hintText: "비밀번호",
+                hintFontSize: 15,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: SizedBox(
-                width: 300,
-                height: 30,
-                child: TextField(
-                  obscureText: true,
-                  style: TextStyle(fontSize: 15, color: Colors.black),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: "비밀번호",
-                    hintStyle: TextStyle(
-                      color: MyColor.hintTextColor,
-                      fontSize: 15,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0),
-                      borderSide: BorderSide(color: MyColor.borderColor),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0),
-                      borderSide: BorderSide(
-                        color: MyColor.borderColor,
-                        width: 1,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(0),
-                      borderSide: BorderSide(
-                        color: MyColor.mainColor,
-                        width: 1,
-                      ),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                  ),
-                ),
+              child: MainButton(
+                buttonWidth: 300,
+                buttonHeight: 30,
+                text: "로그인",
+                fontSize: 13,
+                textColor: Colors.white,
+                textHoverColor: Colors.white,
+                buttonColor: MyColor.mainColor,
+                buttonHoverColor: MyColor.subColor,
+                buttonBorderRadius: 3,
+                buttonHoverBorderRadius: 3,
+                onPressed: widget.controller.login,
+                navigatePage: MainPage(controller: widget.controller),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: SizedBox(
-                width: 300,
-                height: 30,
-                child: TextButton(
-                  onPressed: () {
-                    widget.controller.login();
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            MainPage(controller: widget.controller),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: WidgetStateProperty.all(Colors.white),
-                    backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                      Set<WidgetState> states,
-                    ) {
-                      if (states.contains(WidgetState.hovered)) {
-                        return MyColor.subColor;
-                      }
-                      return MyColor.mainColor;
-                    }),
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                    ),
-                  ),
-                  child: Text("로그인"),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: SizedBox(
-                width: 300,
-                height: 30,
-                child: TextButton(
-                  onPressed: () {
-                    widget.controller.login();
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            MainPage(controller: widget.controller),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    side: WidgetStateProperty.resolveWith<BorderSide>((states) {
-                      if (states.contains(WidgetState.hovered)) {
-                        return BorderSide(color: Color(0xFFd2d2d2), width: 1);
-                      }
-                      return BorderSide(color: MyColor.borderColor, width: 1);
-                    }),
-                    foregroundColor: WidgetStateProperty.all(
-                      MyColor.mainTextColor,
-                    ),
-                    backgroundColor: WidgetStateProperty.all(Colors.white),
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                    ),
-                  ),
-                  child: Text("계정 생성", style: TextStyle(fontSize: 13)),
-                ),
+              child: MainButton(
+                buttonWidth: 300,
+                buttonHeight: 30,
+                text: "계정 생성",
+                fontSize: 13,
+                textColor: MyColor.mainTextColor,
+                textHoverColor: MyColor.mainTextColor,
+                onPressed: widget.controller.login,
+                navigatePage: MainPage(controller: widget.controller),
+                buttonBorderWidth: 1,
+                buttonBorderColor: MyColor.borderColor,
+                buttonHoverBorderWidth: 1,
+                buttonHoverBorderColor: Color(0xFFd2d2d2),
               ),
             ),
             Text(
               "운영자 문의 : admin@jaum.kr",
               style: TextStyle(color: MyColor.mainTextColor, fontSize: 13),
             ),
-            TextButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                  Set<WidgetState> states,
-                ) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return Color(0xFF23527c);
-                  }
-                  return Color(0xFF3389cb);
-                }),
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                ),
-              ),
-              child: Text("개인정보처리방침", style: TextStyle(fontSize: 13)),
+            MainButton(
+              buttonWidth: 125,
+              buttonHeight: 20,
+              text: "개인정보처리방침",
+              fontSize: 13,
+              textColor: Color(0xFF3389cb),
+              textHoverColor: Color(0xFF23527c),
+              buttonColor: Colors.transparent,
+              buttonHoverColor: Colors.transparent,
+              navigatePage: PolicyPage(controller: widget.controller),
             ),
           ],
         ),
