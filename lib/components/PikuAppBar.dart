@@ -113,7 +113,6 @@ class _PikuAppBarState extends State<PikuAppBar> {
                     buttonWidth: 140,
                     buttonHeight: 50,
                     buttonIcon: Icon(Icons.login),
-                    onPressed: widget.controller.login,
                     navigatePage: LoginPage(controller: widget.controller),
                     text: "Login",
                     fontSize: 13,

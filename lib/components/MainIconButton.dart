@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:worldcup/my_color.dart';
 
-enum ButtonFontWeight { bold, normal }
-
 class MainIconButton extends StatefulWidget {
   final double? buttonWidth;
   final double? buttonHeight;
@@ -51,7 +49,9 @@ class _MainIconButtonState extends State<MainIconButton> {
       height: widget.buttonHeight ?? 50,
       child: TextButton.icon(
         onPressed: () {
-          widget.onPressed!();
+          if (widget.onPressed != null) {
+            widget.onPressed!();
+          }
           if (widget.navigatePage != null) {
             Navigator.push(
               context,

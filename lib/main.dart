@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:worldcup/components/MainButton.dart';
+import 'package:worldcup/components/MainIconButton.dart';
+import 'package:worldcup/components/MainTextField.dart';
 import 'package:worldcup/page/worldcup.dart';
 import 'package:worldcup/worldcup_data.dart';
 import 'LoginController.dart';
@@ -32,81 +35,27 @@ class MainPage extends StatelessWidget {
         children: [
           PikuAppBar(controller: controller),
           Padding(
-            padding: const EdgeInsets.only(top: 39),
+            padding: const EdgeInsets.only(top: 39, left: 15),
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: SizedBox(
-                    width: 890,
-                    height: 35,
-                    child: TextField(
-                      style: TextStyle(fontSize: 15, color: Colors.black),
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "월드컵 제목 또는 인물 이름 으로 검색하세요.",
-                        hintStyle: TextStyle(
-                          color: MyColor.hintTextColor,
-                          fontSize: 13,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          borderSide: BorderSide(color: MyColor.borderColor),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          borderSide: BorderSide(
-                            color: MyColor.borderColor,
-                            width: 1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          borderSide: BorderSide(
-                            color: MyColor.mainColor,
-                            width: 1,
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                      ),
-                    ),
-                  ),
+                MainTextField(
+                  textFieldWidth: 890,
+                  textFieldHeight: 35,
+                  hintText: "월드컵 제목 또는 인물 이름 으로 검색하세요.",
+                  hintFontSize: 13,
+                  hintColor: MyColor.hintTextColor,
                 ),
-                SizedBox(
-                  width: 50,
-                  height: 35,
-                  child: TextButton.icon(
-                    onPressed: () {},
 
-                    label: Text(
-                      "검색",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w200,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                        Set<WidgetState> states,
-                      ) {
-                        if (states.contains(WidgetState.hovered)) {
-                          return MyColor.subColor;
-                        }
-                        return MyColor.mainColor;
-                      }),
-                      foregroundColor: WidgetStateProperty.all(Colors.white),
-                      overlayColor: WidgetStateProperty.all(Colors.transparent),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                        ),
-                      ),
-                    ),
-                  ),
+                MainButton(
+                  buttonWidth: 50,
+                  buttonHeight: 35,
+                  text: "검색",
+                  fontSize: 13,
+                  fontWeight: FontWeight.normal,
+                  textColor: Colors.white,
+                  textHoverColor: Colors.white,
+                  buttonColor: MyColor.mainColor,
+                  buttonHoverColor: MyColor.subColor,
                 ),
               ],
             ),
@@ -215,71 +164,23 @@ class MainPage extends StatelessWidget {
                         padding: EdgeInsetsGeometry.only(bottom: 5, left: 5),
                         child: Row(
                           children: [
-                            SizedBox(
-                              height: 30,
-                              width: 105,
-                              child: TextButton.icon(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder:
-                                          (
-                                            context,
-                                            animation,
-                                            secondaryAnimation,
-                                          ) => WorldcupPage(
-                                            controller: controller,
-                                            worldCup: cup,
-                                          ),
-                                      transitionDuration: Duration.zero,
-                                      reverseTransitionDuration: Duration.zero,
-                                    ),
-                                  );
-                                },
-                                icon: Icon(Icons.play_arrow),
-                                label: Text(
-                                  "시작하기",
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w100,
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                  foregroundColor:
-                                      WidgetStateProperty.resolveWith<Color>((
-                                        Set<WidgetState> states,
-                                      ) {
-                                        if (states.contains(
-                                          WidgetState.hovered,
-                                        )) {
-                                          return Colors.white;
-                                        }
-                                        return Color(0xFFed5565);
-                                      }),
-                                  backgroundColor:
-                                      WidgetStateProperty.resolveWith<Color>((
-                                        Set<WidgetState> states,
-                                      ) {
-                                        if (states.contains(
-                                          WidgetState.hovered,
-                                        )) {
-                                          return Color(0xFFed5565);
-                                        }
-                                        return Colors.white;
-                                      }),
-                                  overlayColor: WidgetStateProperty.all(
-                                    Colors.transparent,
-                                  ),
-                                  side: WidgetStateProperty.all(
-                                    BorderSide(color: Color(0xFFed5565)),
-                                  ),
-                                  shape: WidgetStateProperty.all(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                  ),
-                                ),
+                            MainIconButton(
+                              buttonWidth: 105,
+                              buttonHeight: 30,
+                              buttonIcon: Icon(Icons.play_arrow),
+                              text: "시작하기",
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                              textColor: Color(0xFFed5565),
+                              textHoverColor: Colors.white,
+                              buttonBorderColor: Color(0xFFed5565),
+                              buttonBorderRadius: 3,
+                              buttonBorderWidth: 1,
+                              buttonColor: Colors.white,
+                              buttonHoverColor: Color(0xFFed5565),
+                              navigatePage: WorldcupPage(
+                                controller: controller,
+                                worldCup: cup,
                               ),
                             ),
                           ],
