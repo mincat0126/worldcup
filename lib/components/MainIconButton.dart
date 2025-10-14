@@ -8,6 +8,7 @@ class MainButton extends StatefulWidget {
   final double? buttonHeight;
   final Color? buttonColor;
   final Color? buttonHoverColor;
+  final Icon? buttonIcon;
   final String? text;
   final double? fontSize;
   final ButtonFontWeight? fontWeight;
@@ -25,6 +26,7 @@ class MainButton extends StatefulWidget {
     this.buttonHeight,
     this.buttonColor,
     this.buttonHoverColor,
+    this.buttonIcon,
     this.text,
     this.fontSize,
     this.fontWeight,
@@ -58,7 +60,7 @@ class _MainButtonState extends State<MainButton> {
     return SizedBox(
       width: widget.buttonWidth ?? 50,
       height: widget.buttonHeight ?? 50,
-      child: TextButton(
+      child: TextButton.icon(
         onPressed: () {
           if (widget.navigatePage != null) {
             widget.onPressed;
@@ -103,7 +105,8 @@ class _MainButtonState extends State<MainButton> {
             ),
           ),
         ),
-        child: Text(
+        icon: widget.buttonIcon,
+        label: Text(
           widget.text ?? "",
           style: TextStyle(
             fontSize: widget.fontSize ?? 0,
