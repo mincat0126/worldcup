@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worldcup/LoginController.dart';
+import 'package:worldcup/components/MainButton.dart';
+import 'package:worldcup/components/MainIconButton.dart';
 import 'package:worldcup/main.dart';
 import 'package:worldcup/my_color.dart';
 import 'package:worldcup/page/createWorldcup.dart';
@@ -20,37 +22,22 @@ class _PikuAppBarState extends State<PikuAppBar> {
       children: [
         Row(
           children: [
-            SizedBox(
-              height: 50,
-              width: 110,
-              child: TextButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          MainPage(controller: widget.controller),
-                      transitionDuration: Duration.zero,
-                      reverseTransitionDuration: Duration.zero,
-                    ),
-                  );
-                },
-                icon: Icon(Icons.emoji_events, size: 20),
-                label: Text(
-                  "PIKU",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w200),
-                ),
-                style: ButtonStyle(
-                  foregroundColor: WidgetStateProperty.all(Colors.white),
-                  backgroundColor: WidgetStateProperty.all(MyColor.mainColor),
-                  overlayColor: WidgetStateProperty.all(Colors.transparent),
-                  shape: WidgetStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                  ),
-                ),
+            MainIconButton(
+              buttonWidth: 110,
+              buttonHeight: 50,
+              navigatePage: MainPage(controller: widget.controller),
+              buttonIcon: Icon(
+                Icons.emoji_events,
+                size: 20,
+                color: Colors.white,
               ),
+              text: "PIKU",
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+              textColor: Colors.white,
+              textHoverColor: Colors.white,
+              buttonColor: MyColor.mainColor,
+              buttonHoverColor: MyColor.mainColor,
             ),
             SizedBox(
               height: 50,

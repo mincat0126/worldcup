@@ -10,7 +10,7 @@ class MainButton extends StatefulWidget {
   final Color? buttonHoverColor;
   final String? text;
   final double? fontSize;
-  final ButtonFontWeight? fontWeight;
+  final FontWeight? fontWeight;
   final Color? textColor;
   final Color? textHoverColor;
   final double? buttonBorderRadius;
@@ -44,17 +44,6 @@ class MainButton extends StatefulWidget {
 class _MainButtonState extends State<MainButton> {
   @override
   Widget build(BuildContext context) {
-    FontWeight chosenFontWeight;
-    switch (widget.fontWeight) {
-      case ButtonFontWeight.normal:
-        chosenFontWeight = FontWeight.normal;
-        break;
-      case ButtonFontWeight.bold:
-      default:
-        chosenFontWeight = FontWeight.bold;
-        break;
-    }
-
     return SizedBox(
       width: widget.buttonWidth ?? 50,
       height: widget.buttonHeight ?? 50,
@@ -107,7 +96,7 @@ class _MainButtonState extends State<MainButton> {
           widget.text ?? "",
           style: TextStyle(
             fontSize: widget.fontSize ?? 0,
-            fontWeight: chosenFontWeight,
+            fontWeight: widget.fontWeight,
           ),
         ),
       ),
