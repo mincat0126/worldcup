@@ -51,8 +51,8 @@ class _MainIconButtonState extends State<MainIconButton> {
       height: widget.buttonHeight ?? 50,
       child: TextButton.icon(
         onPressed: () {
+          widget.onPressed!();
           if (widget.navigatePage != null) {
-            widget.onPressed;
             Navigator.push(
               context,
               PageRouteBuilder(
@@ -64,6 +64,14 @@ class _MainIconButtonState extends State<MainIconButton> {
             );
           }
         },
+        icon: widget.buttonIcon,
+        label: Text(
+          widget.text ?? "",
+          style: TextStyle(
+            fontSize: widget.fontSize ?? 0,
+            fontWeight: widget.fontWeight,
+          ),
+        ),
         style: ButtonStyle(
           foregroundColor: WidgetStateProperty.resolveWith<Color>((
             Set<WidgetState> states,
@@ -92,14 +100,6 @@ class _MainIconButtonState extends State<MainIconButton> {
                 widget.buttonBorderRadius ?? 0,
               ),
             ),
-          ),
-        ),
-        icon: widget.buttonIcon,
-        label: Text(
-          widget.text ?? "",
-          style: TextStyle(
-            fontSize: widget.fontSize ?? 0,
-            fontWeight: widget.fontWeight,
           ),
         ),
       ),

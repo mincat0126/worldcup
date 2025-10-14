@@ -49,8 +49,8 @@ class _MainButtonState extends State<MainButton> {
       height: widget.buttonHeight ?? 50,
       child: TextButton(
         onPressed: () {
+          widget.onPressed!();
           if (widget.navigatePage != null) {
-            widget.onPressed;
             Navigator.push(
               context,
               PageRouteBuilder(
