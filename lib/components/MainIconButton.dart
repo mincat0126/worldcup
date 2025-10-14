@@ -3,7 +3,7 @@ import 'package:worldcup/my_color.dart';
 
 enum ButtonFontWeight { bold, normal }
 
-class MainButton extends StatefulWidget {
+class MainIconButton extends StatefulWidget {
   final double? buttonWidth;
   final double? buttonHeight;
   final Color? buttonColor;
@@ -20,7 +20,7 @@ class MainButton extends StatefulWidget {
   final Widget? navigatePage;
   final VoidCallback? onPressed;
 
-  const MainButton({
+  const MainIconButton({
     super.key,
     this.buttonWidth,
     this.buttonHeight,
@@ -40,10 +40,10 @@ class MainButton extends StatefulWidget {
   });
 
   @override
-  State<MainButton> createState() => _MainButtonState();
+  State<MainIconButton> createState() => _MainIconButtonState();
 }
 
-class _MainButtonState extends State<MainButton> {
+class _MainIconButtonState extends State<MainIconButton> {
   @override
   Widget build(BuildContext context) {
     FontWeight chosenFontWeight;
