@@ -27,6 +27,8 @@ class MainTextField extends StatefulWidget {
   final double? focusedBorderWidth;
 
   final bool? password;
+  final ValueChanged<String>? onSubmitted;
+  final TextEditingController? searchController;
 
   const MainTextField({
     super.key,
@@ -49,6 +51,8 @@ class MainTextField extends StatefulWidget {
     this.focusedBorderColor,
     this.focusedBorderWidth,
     this.password,
+    this.onSubmitted,
+    this.searchController,
   });
 
   @override
@@ -62,6 +66,7 @@ class _MainTextFieldState extends State<MainTextField> {
       width: widget.textFieldWidth ?? 150,
       height: widget.textFieldHeight ?? 150,
       child: TextField(
+        controller: widget.searchController,
         style: TextStyle(
           fontSize: widget.fontSize ?? 10,
           fontWeight: widget.fontWeight ?? FontWeight.normal,
@@ -104,6 +109,11 @@ class _MainTextFieldState extends State<MainTextField> {
           hoverColor: Colors.transparent,
         ),
         obscureText: widget.password ?? false,
+        onSubmitted: (text) {
+          if (widget.onSubmitted != null) {
+            widget.onSubmitted!(text);
+          }
+        },
       ),
     );
   }

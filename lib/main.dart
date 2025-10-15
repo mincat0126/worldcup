@@ -23,6 +23,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   TextEditingController searchController = TextEditingController();
+  List searchingWorldcup = worldCups;
 
   @override
   void dispose() {
@@ -30,10 +31,22 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
+  void searchWorldcup(String query) {
+    query = query.trim();
+
+    setState(() {
+      if (query.isEmpty) {
+        searchingWorldcup = worldCups;
+      } else {
+        searchingWorldcup = worldCups.where((cup) {
+          return cup.title.toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = LoginController();
-
     return MaterialApp(
       home: Scaffold(
         backgroundColor: MyColor.backgroundColor,
@@ -50,6 +63,10 @@ class _MainPageState extends State<MainPage> {
                     textFieldHeight: 35,
                     hintText: "월드컵 제목 또는 인물 이름 으로 검색하세요.",
                     hintFontSize: 13,
+                    onSubmitted: (text) {
+                      searchWorldcup(text);
+                    },
+                    searchController: searchController,
                   ),
 
                   MainButton(
@@ -62,6 +79,9 @@ class _MainPageState extends State<MainPage> {
                     textHoverColor: Colors.white,
                     buttonColor: MyColor.mainColor,
                     buttonHoverColor: MyColor.subColor,
+                    onPressed: () {
+                      searchWorldcup(searchController.text);
+                    },
                   ),
                 ],
               ),
@@ -75,9 +95,9 @@ class _MainPageState extends State<MainPage> {
                   crossAxisSpacing: 8,
                   childAspectRatio: 0.8,
                 ),
-                itemCount: worldCups.length,
+                itemCount: searchingWorldcup.length,
                 itemBuilder: (context, index) {
-                  final cup = worldCups[index];
+                  final cup = searchingWorldcup[index];
                   return Container(
                     width: 10,
                     height: 300,

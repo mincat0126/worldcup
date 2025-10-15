@@ -99,12 +99,12 @@ class _MainIconButtonState extends State<MainIconButton> {
           side: WidgetStateProperty.resolveWith<BorderSide>((states) {
             if (states.contains(WidgetState.hovered)) {
               return BorderSide(
-                color: widget.buttonHoverBorderColor ?? MyColor.borderColor,
+                color: widget.buttonHoverBorderColor ?? Colors.transparent,
                 width: widget.buttonHoverBorderWidth ?? 0,
               );
             }
             return BorderSide(
-              color: widget.buttonBorderColor ?? MyColor.borderColor,
+              color: widget.buttonBorderColor ?? Colors.transparent,
               width: widget.buttonBorderWidth ?? 0,
             );
           }),
