@@ -114,13 +114,13 @@ class _MainIconButtonState extends State<MainIconButton> {
             if (states.contains(WidgetState.hovered)) {
               return RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
-                  widget.buttonBorderRadius ?? 0,
+                  widget.buttonHoverBorderRadius ?? 0,
                 ),
               );
             }
             return RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
-                widget.buttonHoverBorderRadius ?? 0,
+                widget.buttonBorderRadius ?? 0,
               ),
             );
           }),

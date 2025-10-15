@@ -57,7 +57,7 @@ class _MainButtonState extends State<MainButton> {
             widget.onPressed!();
           }
           if (widget.navigatePage != null) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) =>
@@ -103,13 +103,13 @@ class _MainButtonState extends State<MainButton> {
             if (states.contains(WidgetState.hovered)) {
               return RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
-                  widget.buttonBorderRadius ?? 0,
+                  widget.buttonHoverBorderRadius ?? 0,
                 ),
               );
             }
             return RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
-                widget.buttonHoverBorderRadius ?? 0,
+                widget.buttonBorderRadius ?? 0,
               ),
             );
           }),
