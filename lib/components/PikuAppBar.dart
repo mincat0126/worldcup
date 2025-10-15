@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:worldcup/LoginController.dart';
 import 'package:worldcup/components/MainButton.dart';
 import 'package:worldcup/components/MainIconButton.dart';
@@ -9,8 +10,7 @@ import 'package:worldcup/page/login.dart';
 import 'package:worldcup/page/profile.dart';
 
 class PikuAppBar extends StatefulWidget {
-  final LoginController controller;
-  const PikuAppBar({super.key, required this.controller});
+  const PikuAppBar({super.key});
 
   @override
   State<PikuAppBar> createState() => _PikuAppBarState();
@@ -19,6 +19,8 @@ class PikuAppBar extends StatefulWidget {
 class _PikuAppBarState extends State<PikuAppBar> {
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<LoginController>(context);
+
     return Column(
       children: [
         Row(
@@ -26,7 +28,7 @@ class _PikuAppBarState extends State<PikuAppBar> {
             MainIconButton(
               buttonWidth: 110,
               buttonHeight: 50,
-              navigatePage: MainPage(controller: widget.controller),
+              navigatePage: MainPage(),
               buttonIcon: Icon(
                 Icons.emoji_events,
                 size: 20,
@@ -43,39 +45,37 @@ class _PikuAppBarState extends State<PikuAppBar> {
             MainButton(
               buttonWidth: 120,
               buttonHeight: 50,
-              navigatePage: MainPage(controller: widget.controller),
+              navigatePage: MainPage(),
               text: "이상형 월드컵",
               fontSize: 13,
               fontWeight: FontWeight.bold,
             ),
-            widget.controller.isLogin
+            controller.isLogin
                 ? MainButton(
                     buttonWidth: 160,
                     buttonHeight: 50,
-                    navigatePage: CreateWorlcupPage(
-                      controller: widget.controller,
-                    ),
+                    navigatePage: CreateWorlcupPage(),
                     text: "이상형 월드컵 만들기",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   )
                 : SizedBox(),
-            widget.controller.isLogin
+            controller.isLogin
                 ? MainButton(
                     buttonWidth: 120,
                     buttonHeight: 50,
-                    navigatePage: MainPage(controller: widget.controller),
+                    navigatePage: MainPage(),
                     text: "내가 만든 월드컵",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   )
                 : SizedBox(),
 
-            widget.controller.isLogin
+            controller.isLogin
                 ? MainButton(
                     buttonWidth: 90,
                     buttonHeight: 50,
-                    navigatePage: MainPage(controller: widget.controller),
+                    navigatePage: MainPage(),
                     text: "이어하기",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
@@ -89,7 +89,7 @@ class _PikuAppBarState extends State<PikuAppBar> {
                 decoration: BoxDecoration(color: Colors.white),
               ),
             ),
-            widget.controller.isLogin
+            controller.isLogin
                 ? MainIconButton(
                     buttonWidth: 160,
                     buttonHeight: 50,
@@ -97,16 +97,16 @@ class _PikuAppBarState extends State<PikuAppBar> {
                     text: "회원정보 수정",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
-                    navigatePage: ProfilePage(controller: widget.controller),
+                    navigatePage: ProfilePage(),
                   )
                 : SizedBox(),
-            widget.controller.isLogin
+            controller.isLogin
                 ? MainIconButton(
                     buttonWidth: 120,
                     buttonHeight: 50,
                     buttonIcon: Icon(Icons.logout),
-                    onPressed: widget.controller.logout,
-                    navigatePage: MainPage(controller: widget.controller),
+                    onPressed: controller.logout,
+                    navigatePage: MainPage(),
                     text: "Log out",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class _PikuAppBarState extends State<PikuAppBar> {
                     buttonWidth: 140,
                     buttonHeight: 50,
                     buttonIcon: Icon(Icons.login),
-                    navigatePage: LoginPage(controller: widget.controller),
+                    navigatePage: LoginPage(),
                     text: "Login",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,

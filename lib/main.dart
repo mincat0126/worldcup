@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:worldcup/components/MainButton.dart';
 import 'package:worldcup/components/MainIconButton.dart';
 import 'package:worldcup/components/MainTextField.dart';
@@ -9,13 +10,16 @@ import 'components/PikuAppbar.dart';
 import 'my_color.dart';
 
 void main() {
-  LoginController controller = LoginController();
-  runApp(MainPage(controller: controller));
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => LoginController(),
+      child: const MainPage(),
+    ),
+  );
 }
 
 class MainPage extends StatefulWidget {
-  final LoginController controller;
-  const MainPage({super.key, required this.controller});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -52,7 +56,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: MyColor.backgroundColor,
         body: Column(
           children: [
-            PikuAppBar(controller: widget.controller),
+            PikuAppBar(),
             Padding(
               padding: const EdgeInsets.only(top: 39, left: 15),
               child: Row(
@@ -204,10 +208,7 @@ class _MainPageState extends State<MainPage> {
                                 buttonBorderWidth: 1,
                                 buttonColor: Colors.white,
                                 buttonHoverColor: Color(0xFFed5565),
-                                navigatePage: WorldcupPage(
-                                  controller: widget.controller,
-                                  worldCup: cup,
-                                ),
+                                navigatePage: WorldcupPage(worldCup: cup),
                               ),
                             ],
                           ),

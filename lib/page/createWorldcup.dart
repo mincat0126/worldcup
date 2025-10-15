@@ -5,8 +5,7 @@ import 'package:worldcup/my_color.dart';
 import 'package:worldcup/worldcup_data.dart';
 
 class CreateWorlcupPage extends StatefulWidget {
-  final LoginController controller;
-  const CreateWorlcupPage({super.key, required this.controller});
+  const CreateWorlcupPage({super.key});
 
   @override
   State<CreateWorlcupPage> createState() => _CreateWorlcupPageState();
@@ -32,7 +31,7 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            PikuAppBar(controller: widget.controller),
+            PikuAppBar(),
             SizedBox(
               width: double.infinity,
               height: 2000,

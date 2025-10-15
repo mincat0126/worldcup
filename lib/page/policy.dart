@@ -4,8 +4,7 @@ import 'package:worldcup/components/PikuAppBar.dart';
 import 'package:worldcup/my_color.dart';
 
 class PolicyPage extends StatefulWidget {
-  final LoginController controller;
-  const PolicyPage({super.key, required this.controller});
+  const PolicyPage({super.key});
 
   @override
   State<PolicyPage> createState() => _PolicyPageState();
@@ -19,7 +18,7 @@ class _PolicyPageState extends State<PolicyPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            PikuAppBar(controller: widget.controller),
+            PikuAppBar(),
             Padding(
               padding: EdgeInsetsGeometry.only(top: 35, left: 15, bottom: 40),
               child: Text('''

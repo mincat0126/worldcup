@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:worldcup/LoginController.dart';
 import 'package:worldcup/components/MainButton.dart';
 import 'package:worldcup/components/MainTextField.dart';
@@ -9,8 +10,7 @@ import 'package:worldcup/my_color.dart';
 import 'package:worldcup/page/policy.dart';
 
 class LoginPage extends StatefulWidget {
-  final LoginController controller;
-  const LoginPage({super.key, required this.controller});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,12 +19,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<LoginController>(context);
+
     return Scaffold(
       backgroundColor: MyColor.backgroundColor,
       body: Center(
         child: Column(
           children: [
-            PikuAppBar(controller: widget.controller),
+            PikuAppBar(),
             SizedBox(height: 60),
             Icon(Icons.emoji_events, size: 200, color: Color(0xFFe6e6e6)),
             Text(
@@ -77,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                 buttonHoverColor: MyColor.subColor,
                 buttonBorderRadius: 3,
                 buttonHoverBorderRadius: 3,
-                onPressed: widget.controller.login,
-                navigatePage: MainPage(controller: widget.controller),
+                onPressed: controller.login,
+                navigatePage: MainPage(),
               ),
             ),
             Padding(
@@ -90,8 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: 13,
                 textColor: MyColor.mainTextColor,
                 textHoverColor: MyColor.mainTextColor,
-                onPressed: widget.controller.login,
-                navigatePage: MainPage(controller: widget.controller),
+                onPressed: controller.login,
+                navigatePage: MainPage(),
                 buttonBorderWidth: 1,
                 buttonBorderColor: MyColor.borderColor,
                 buttonHoverBorderWidth: 1,
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
               textHoverColor: Color(0xFF23527c),
               buttonColor: Colors.transparent,
               buttonHoverColor: Colors.transparent,
-              navigatePage: PolicyPage(controller: widget.controller),
+              navigatePage: PolicyPage(),
             ),
           ],
         ),

@@ -7,13 +7,11 @@ import 'package:worldcup/main.dart';
 import 'package:worldcup/my_color.dart';
 
 class ResultPage extends StatefulWidget {
-  final LoginController controller;
   final String winnerImage;
   final String winnerName;
 
   const ResultPage({
     super.key,
-    required this.controller,
     required this.winnerImage,
     required this.winnerName,
   });
@@ -29,7 +27,7 @@ class _ResultPageState extends State<ResultPage> {
       backgroundColor: MyColor.backgroundColor,
       body: Column(
         children: [
-          PikuAppBar(controller: widget.controller),
+          PikuAppBar(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -108,9 +106,7 @@ class _ResultPageState extends State<ResultPage> {
                                 buttonHoverColor: MyColor.subColor,
                                 buttonBorderRadius: 3,
                                 buttonHoverBorderRadius: 3,
-                                navigatePage: MainPage(
-                                  controller: widget.controller,
-                                ),
+                                navigatePage: MainPage(),
                               ),
                             ),
                           ),

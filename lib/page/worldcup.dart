@@ -9,14 +9,9 @@ import 'package:worldcup/page/result.dart';
 import 'package:worldcup/worldcup_data.dart';
 
 class WorldcupPage extends StatefulWidget {
-  final LoginController controller;
   final WorldCup worldCup;
 
-  const WorldcupPage({
-    super.key,
-    required this.controller,
-    required this.worldCup,
-  });
+  const WorldcupPage({super.key, required this.worldCup});
 
   @override
   State<WorldcupPage> createState() => _WorldcupPageState();
@@ -62,11 +57,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  ResultPage(
-                    controller: widget.controller,
-                    winnerImage: winnerImage,
-                    winnerName: winnerName,
-                  ),
+                  ResultPage(winnerImage: winnerImage, winnerName: winnerName),
 
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero,
@@ -151,7 +142,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
       backgroundColor: MyColor.backgroundColor,
       body: Column(
         children: [
-          PikuAppBar(controller: widget.controller),
+          PikuAppBar(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
