@@ -6,6 +6,7 @@ import 'package:worldcup/main.dart';
 import 'package:worldcup/my_color.dart';
 import 'package:worldcup/page/createWorldcup.dart';
 import 'package:worldcup/page/login.dart';
+import 'package:worldcup/page/profile.dart';
 
 class PikuAppBar extends StatefulWidget {
   final LoginController controller;
@@ -96,6 +97,7 @@ class _PikuAppBarState extends State<PikuAppBar> {
                     text: "회원정보 수정",
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
+                    navigatePage: ProfilePage(controller: widget.controller),
                   )
                 : SizedBox(),
             widget.controller.isLogin
