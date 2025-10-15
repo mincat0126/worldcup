@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:worldcup/LoginController.dart';
 import 'package:worldcup/components/PikuAppBar.dart';
 import 'package:worldcup/components/StrokeText.dart';
 import 'package:worldcup/my_color.dart';
@@ -121,6 +120,7 @@ class _WorldcupPageState extends State<WorldcupPage> {
     });
 
     Timer(const Duration(seconds: 1), () {
+      if (!mounted) return;
       setState(() {
         animating = false;
         nextRoundIndexes.add(currentImages[selectedIndex]);

@@ -28,7 +28,8 @@ class MainTextField extends StatefulWidget {
 
   final bool? password;
   final ValueChanged<String>? onSubmitted;
-  final TextEditingController? searchController;
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
 
   const MainTextField({
     super.key,
@@ -52,7 +53,8 @@ class MainTextField extends StatefulWidget {
     this.focusedBorderWidth,
     this.password,
     this.onSubmitted,
-    this.searchController,
+    this.onChanged,
+    this.controller,
   });
 
   @override
@@ -66,7 +68,7 @@ class _MainTextFieldState extends State<MainTextField> {
       width: widget.textFieldWidth ?? 150,
       height: widget.textFieldHeight ?? 150,
       child: TextField(
-        controller: widget.searchController,
+        controller: widget.controller,
         style: TextStyle(
           fontSize: widget.fontSize ?? 10,
           fontWeight: widget.fontWeight ?? FontWeight.normal,
@@ -114,6 +116,7 @@ class _MainTextFieldState extends State<MainTextField> {
             widget.onSubmitted!(text);
           }
         },
+        onChanged: widget.onChanged,
       ),
     );
   }

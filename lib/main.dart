@@ -8,6 +8,7 @@ import 'package:worldcup/worldcup_data.dart';
 import 'LoginController.dart';
 import 'components/PikuAppbar.dart';
 import 'my_color.dart';
+import 'dart:io';
 
 void main() {
   runApp(
@@ -58,6 +59,19 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  Widget buildImage(String path) {
+    if (path.startsWith('assets/')) {
+      return Image.asset(path, fit: BoxFit.cover);
+    } else if (File(path).existsSync()) {
+      return Image.file(File(path), fit: BoxFit.cover);
+    } else {
+      return Container(
+        color: Colors.grey[300],
+        child: const Icon(Icons.broken_image, color: Colors.grey),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,12 +87,12 @@ class _MainPageState extends State<MainPage> {
                   fontSize: 15,
                   textFieldWidth: 890,
                   textFieldHeight: 35,
-                  hintText: "월드컵 제목 또는 인물 이름 으로 검색하세요.",
+                  hintText: "월드컵 제목 또는 인물 이름 으로 검색 하세요.",
                   hintFontSize: 13,
                   onSubmitted: (text) {
                     searchWorldcup(text);
                   },
-                  searchController: searchController,
+                  controller: searchController,
                 ),
 
                 MainButton(
@@ -118,18 +132,8 @@ class _MainPageState extends State<MainPage> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
-                            child: Image.asset(
-                              cup.images[0],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Expanded(
-                            child: Image.asset(
-                              cup.images[1],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          Expanded(child: buildImage(cup.images[0])),
+                          Expanded(child: buildImage(cup.images[1])),
                         ],
                       ),
                       Container(

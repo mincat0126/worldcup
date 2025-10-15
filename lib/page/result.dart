@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worldcup/LoginController.dart';
 import 'package:worldcup/components/MainIconButton.dart';
 import 'package:worldcup/components/PikuAppbar.dart';
 import 'package:worldcup/components/StrokeText.dart';

@@ -1,5 +1,10 @@
+import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:worldcup/LoginController.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:worldcup/components/MainButton.dart';
+import 'package:worldcup/components/MainTextField.dart';
 import 'package:worldcup/components/PikuAppBar.dart';
 import 'package:worldcup/my_color.dart';
 import 'package:worldcup/worldcup_data.dart';
@@ -12,16 +17,48 @@ class CreateWorlcupPage extends StatefulWidget {
 }
 
 class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
-  // 추가: 텍스트 필드 값 받을 컨트롤러
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
+  List<String> images = List.generate(8, (_) => "");
+  List<String> iamgesNames = List.generate(8, (_) => "");
+
   @override
   void dispose() {
-    //  메모리 해제
     titleController.dispose();
     descriptionController.dispose();
     super.dispose();
+  }
+
+  void addWorldCup() {
+    final newCup = WorldCup(
+      id: worldCups.length + 1,
+      title: titleController.text,
+      description: descriptionController.text,
+      images: List.from(images),
+      imageNames: List.from(iamgesNames),
+    );
+
+    setState(() {
+      worldCups.add(newCup);
+
+      images = List.generate(8, (_) => "");
+      iamgesNames = List.generate(8, (_) => "");
+      titleController.clear();
+      descriptionController.clear();
+    });
+  }
+
+  void updateImage(int index, String path) {
+    setState(() {
+      images[index] = path;
+    });
+  }
+
+  void updateImageName(int index, String name) {
+    setState(() {
+      iamgesNames[index] = name;
+    });
   }
 
   @override
@@ -119,56 +156,19 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Expanded(
-                                                child: TextField(
-                                                  //  연결: 제목 컨트롤러
-                                                  controller: titleController,
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black,
-                                                  ),
-                                                  decoration: InputDecoration(
-                                                    filled: true,
-                                                    fillColor: Colors.white,
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            0,
-                                                          ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            MyColor.borderColor,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                        right: 20,
                                                       ),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                0,
-                                                              ),
-                                                          borderSide: BorderSide(
-                                                            color: MyColor
-                                                                .borderColor,
-                                                            width: 1,
-                                                          ),
-                                                        ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                0,
-                                                              ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                                color: MyColor
-                                                                    .mainColor,
-                                                                width: 1,
-                                                              ),
-                                                        ),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                          horizontal: 12,
-                                                          vertical: 8,
-                                                        ),
+                                                  child: MainTextField(
+                                                    fontSize: 15,
+                                                    textFieldWidth:
+                                                        double.infinity,
+                                                    enabledBorderColor:
+                                                        MyColor.borderColor,
+                                                    enabledBorderWidth: 1,
+                                                    controller: titleController,
                                                   ),
                                                 ),
                                               ),
@@ -231,57 +231,20 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Expanded(
-                                                child: TextField(
-                                                  //  연결: 설명 컨트롤러
-                                                  controller:
-                                                      descriptionController,
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black,
-                                                  ),
-                                                  decoration: InputDecoration(
-                                                    filled: true,
-                                                    fillColor: Colors.white,
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            0,
-                                                          ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            MyColor.borderColor,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                        right: 20,
                                                       ),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                0,
-                                                              ),
-                                                          borderSide: BorderSide(
-                                                            color: MyColor
-                                                                .borderColor,
-                                                            width: 1,
-                                                          ),
-                                                        ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                0,
-                                                              ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                                color: MyColor
-                                                                    .mainColor,
-                                                                width: 1,
-                                                              ),
-                                                        ),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                          horizontal: 12,
-                                                          vertical: 8,
-                                                        ),
+                                                  child: MainTextField(
+                                                    fontSize: 15,
+                                                    textFieldWidth:
+                                                        double.infinity,
+                                                    enabledBorderColor:
+                                                        MyColor.borderColor,
+                                                    enabledBorderWidth: 1,
+                                                    controller:
+                                                        descriptionController,
                                                   ),
                                                 ),
                                               ),
@@ -310,60 +273,16 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
                               ),
                               Padding(
                                 padding: EdgeInsetsGeometry.only(left: 175),
-                                child: SizedBox(
-                                  width: 80,
-                                  height: 30,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      //  제목, 설명 가져오기
-                                      String title = titleController.text;
-                                      String description =
-                                          descriptionController.text;
-
-                                      // 새 WorldCup 객체 만들기
-                                      WorldCup newWorldCup = WorldCup(
-                                        id:
-                                            worldCups.length +
-                                            1, // 간단히 ID를 리스트 길이 + 1로 설정
-                                        title: title,
-                                        description: description,
-                                        images: [], // 이미지 초기값 비워두기
-                                        imageNames: [], // 이미지 이름 초기값 비워두기
-                                      );
-
-                                      // 리스트에 추가
-                                      setState(() {
-                                        worldCups.add(newWorldCup);
-                                      });
-                                    },
-                                    style: ButtonStyle(
-                                      foregroundColor: WidgetStateProperty.all(
-                                        Colors.white,
-                                      ),
-                                      backgroundColor:
-                                          WidgetStateProperty.resolveWith<
-                                            Color
-                                          >((Set<WidgetState> states) {
-                                            if (states.contains(
-                                              WidgetState.hovered,
-                                            )) {
-                                              return MyColor.subColor;
-                                            }
-                                            return MyColor.mainColor;
-                                          }),
-                                      overlayColor: WidgetStateProperty.all(
-                                        Colors.transparent,
-                                      ),
-                                      shape: WidgetStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    child: Text("저장하기"),
-                                  ),
+                                child: MainButton(
+                                  buttonWidth: 80,
+                                  buttonHeight: 30,
+                                  text: "저장하기",
+                                  fontSize: 14,
+                                  textColor: Colors.white,
+                                  textHoverColor: Colors.white,
+                                  buttonColor: MyColor.mainColor,
+                                  buttonHoverColor: MyColor.subColor,
+                                  onPressed: addWorldCup,
                                 ),
                               ),
                               Padding(
@@ -474,14 +393,17 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
                                       ),
                                     ],
                                   ),
-                                  EditImage(imageNumber: 1),
-                                  EditImage(imageNumber: 2),
-                                  EditImage(imageNumber: 3),
-                                  EditImage(imageNumber: 4),
-                                  EditImage(imageNumber: 5),
-                                  EditImage(imageNumber: 6),
-                                  EditImage(imageNumber: 7),
-                                  EditImage(imageNumber: 8),
+
+                                  EditImage(
+                                    imageNumber: 1,
+                                    onImageSelected: updateImage,
+                                    onNameChanged: updateImageName,
+                                  ),
+                                  EditImage(
+                                    imageNumber: 2,
+                                    onImageSelected: updateImage,
+                                    onNameChanged: updateImageName,
+                                  ),
                                 ],
                               ),
                             ],
@@ -500,10 +422,46 @@ class _CreateWorlcupPageState extends State<CreateWorlcupPage> {
   }
 }
 
-class EditImage extends StatelessWidget {
+class EditImage extends StatefulWidget {
   final int imageNumber;
+  final Function(int, String) onImageSelected;
+  final Function(int, String) onNameChanged;
 
-  const EditImage({super.key, required this.imageNumber});
+  const EditImage({
+    super.key,
+    required this.imageNumber,
+    required this.onImageSelected,
+    required this.onNameChanged,
+  });
+
+  @override
+  State<EditImage> createState() => _EditImageState();
+}
+
+class _EditImageState extends State<EditImage> {
+  Uint8List? imageByte;
+  Future<void> pickImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (pickedImage != null) {
+      Uint8List? bytes;
+
+      if (kIsWeb) {
+        bytes = await pickedImage.readAsBytes();
+      } else {
+        bytes = await pickedImage.readAsBytes();
+      }
+
+      setState(() {
+        imageByte = bytes;
+      });
+
+      widget.onImageSelected(widget.imageNumber - 1, pickedImage.name);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -512,14 +470,10 @@ class EditImage extends StatelessWidget {
         Container(
           width: 80,
           height: 110,
-          decoration: BoxDecoration(
-            color: Color(0xFFf5f5f6),
-            border: Border.all(color: Color(0xFFe7e7e7), width: 1),
-          ),
-          child: Padding(
-            padding: EdgeInsetsGeometry.only(left: 5, top: 8),
+          color: Color(0xFFf5f5f6),
+          child: Center(
             child: Text(
-              "$imageNumber",
+              "${widget.imageNumber}",
               style: TextStyle(
                 color: MyColor.mainTextColor,
                 fontSize: 13,
@@ -528,55 +482,29 @@ class EditImage extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: 130,
-          height: 110,
-          decoration: BoxDecoration(
+        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () => pickImage(context),
+          child: Container(
+            width: 130,
+            height: 110,
             color: Color(0xFFf5f5f6),
-            border: Border.all(color: Color(0xFFe7e7e7), width: 1),
+            child: imageByte != null
+                ? Image.memory(imageByte!, fit: BoxFit.cover)
+                : Center(child: Icon(Icons.add_a_photo)),
           ),
         ),
-        Container(
-          width: 430,
-          height: 110,
-          decoration: BoxDecoration(
-            color: Color(0xFFf9f9f9),
-            border: Border.all(color: Color(0xFFe7e7e7), width: 1),
-          ),
-          child: Padding(
-            padding: EdgeInsetsGeometry.all(5),
-            child: SizedBox(
-              width: 50,
-              height: 20,
-              child: TextField(
-                style: TextStyle(fontSize: 15, color: MyColor.mainTextColor),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  isDense: true,
-
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(color: MyColor.borderColor),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(
-                      color: MyColor.borderColor,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(color: MyColor.mainColor, width: 1),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                ),
-              ),
-            ),
+        SizedBox(width: 10),
+        Expanded(
+          child: MainTextField(
+            borderWidth: 50,
+            textFieldHeight: 20,
+            fontSize: 15,
+            textColor: MyColor.mainTextColor,
+            enabledBorderColor: MyColor.borderColor,
+            enabledBorderWidth: 1,
+            onChanged: (value) =>
+                widget.onNameChanged(widget.imageNumber - 1, value),
           ),
         ),
       ],

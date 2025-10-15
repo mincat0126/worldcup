@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worldcup/LoginController.dart';
 import 'package:worldcup/components/PikuAppBar.dart';
 import 'package:worldcup/my_color.dart';
 
